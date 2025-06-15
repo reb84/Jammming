@@ -1,0 +1,25 @@
+.Track-Container {
+    display: flex;
+}
+
+.Track-Add {
+    cursor: crosshair;
+    color: green;
+}
+
+
+.Track-Info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid;
+}
+
+.Track-Info h3 {
+    margin-bottom: 0rem;
+}
+
+.Track-Info p {
+    color: blueviolet;
+}
