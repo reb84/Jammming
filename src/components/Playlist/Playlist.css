@@ -1,4 +1,13 @@
-.Playlist-Container {
-    border:1px solid;
-    padding: 5px;
+.playlist-section {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+
+.playlist-title {
+    font-size: 20px;
+    color: #1f2937;
+    margin: 0;
 }

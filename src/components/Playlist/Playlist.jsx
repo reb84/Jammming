@@ -1,12 +1,12 @@
-import Tracklist from "../Tracklist/Tracklist";
+import React from "react";
 import "./Playlist.css";
 
-function Playlist() {
+const PlaylistSection = () => {
   return (
-    <div className="Playlist-Container">
-      <Tracklist />
+    <div className="playlist-section">
+      <h2 className="playlist-title">Your Playlist</h2>
     </div>
   );
-}
+};
 
-export default Playlist;
+export default PlaylistSection;
