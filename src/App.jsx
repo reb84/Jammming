@@ -1,5 +1,5 @@
-import SearchBar from "../SearchBar/SearchBar";
-import Playlist from "../Playlist/Playlist";
+import SearchBar from "./components/SearchBar/SearchBar";
+import Playlist from "./components/Playlist/Playlist";
 
 import "./App.css";
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <SearchBar />
-      <Playlist/>
+      <Playlist />
     </div>
   );
 }
