@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchSection from "./components/SearchSection/SearchSection";
-import PlaylistSection from "./components/Playlist/Playlist";
+import PlaylistSection from "./components/PlaylistSection/PlaylistSection";
 import "./App.css";
 
 // Mock data
@@ -33,7 +33,7 @@ const mockSearchResults = [
 
 function App() {
   return (
-    <div className="app">
+    <div className="App">
       <div className="container">
         <div className="header">
           <h1 className="app-title">jammming</h1>
