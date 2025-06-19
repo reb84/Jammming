@@ -2,7 +2,7 @@ import React from "react";
 import { Music, Plus } from "lucide-react";
 import "./TrackItem.css";
 
-const TrackItem = ({ track }) => {
+const TrackItem = ({ track, onAdd }) => {
   return (
     <div className="track-item">
       <div className="track-content">

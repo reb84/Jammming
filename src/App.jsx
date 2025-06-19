@@ -32,6 +32,12 @@ const mockSearchResults = [
 ];
 
 function App() {
+  const [playlist, setPlaylist] = useState([]);
+
+  const handleAddTrack = (track) => {
+    setPlaylist((prev) => [...prev, track]); // add track to playlist state
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -40,9 +46,12 @@ function App() {
         </div>
 
         <div className="main-content">
-          <SearchSection searchResults={mockSearchResults} />
+          <SearchSection
+            searchResults={mockSearchResults}
+            onAddTrack={handleAddTrack}
+          />
 
-          <PlaylistSection />
+          <PlaylistSection playlist={playlist} />
         </div>
       </div>
     </div>
