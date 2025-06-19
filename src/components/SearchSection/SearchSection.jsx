@@ -1,5 +1,5 @@
 import React from "react";
-import Track from "../Track/Track";
+import TrackItem from "../TrackItem/TrackItem";
 import SearchBar from "../SearchBar/SearchBar";
 import "./SearchSection.css";
 
@@ -10,7 +10,7 @@ const SearchSection = ({ searchQuery, searchResults }) => {
 
       <div className="search-results">
         {searchResults.map((track) => (
-          <Track key={track.id} track={track} />
+          <TrackItem key={track.id} track={track} />
         ))}
       </div>
     </div>

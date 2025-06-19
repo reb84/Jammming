@@ -1,8 +1,8 @@
 import React from "react";
-import { Music } from "lucide-react";
-import "./Track.css";
+import { Music, Plus } from "lucide-react";
+import "./TrackItem.css";
 
-const Track = ({ track }) => {
+const TrackItem = ({ track }) => {
   return (
     <div className="track-item">
       <div className="track-content">
@@ -17,8 +17,16 @@ const Track = ({ track }) => {
           <p className="track-duration">{track.duration}</p>
         </div>
       </div>
+      <div className="track-action">
+        <button
+          onClick={() => onAdd(track)} // add track to playlist
+          className="add-btn"
+        >
+          <Plus className="add-icon" />
+        </button>
+      </div>
     </div>
   );
 };
 
-export default Track;
+export default TrackItem;
