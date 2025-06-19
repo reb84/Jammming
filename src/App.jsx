@@ -38,6 +38,10 @@ function App() {
     setPlaylist((prev) => [...prev, track]); // add track to playlist state
   };
 
+  const handleRemoveTrack = (trackId) => {
+    setPlaylist((prev) => prev.filter((track) => track.id !== trackId));
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -51,7 +55,10 @@ function App() {
             onAddTrack={handleAddTrack}
           />
 
-          <PlaylistSection playlist={playlist} />
+          <PlaylistSection
+            playlist={playlist}
+            onRemoveTrack={handleRemoveTrack}
+          />
         </div>
       </div>
     </div>

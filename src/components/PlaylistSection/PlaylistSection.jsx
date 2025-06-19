@@ -2,19 +2,19 @@ import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
 import "./PlaylistSection.css";
 
-const PlaylistSection = ({ playlist }) => {
+const PlaylistSection = ({ playlist, onRemoveTrack }) => {
   return (
     <div className="playlist-section">
       <h2 className="playlist-title">Your Playlist</h2>
 
       <div className="playlist-tracks">
         {playlist.length > 0 ? (
-          // ↓ This maps through each track in the playlist
+          // maps through each track in playlist
           playlist.map((track, index) => (
             <div key={`${track.id}-${index}`} className="playlist-track-item">
-
               <TrackItem
                 track={track} // track data
+                onRemove={onRemoveTrack} // remove track
               />
             </div>
           ))

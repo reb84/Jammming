@@ -1,8 +1,8 @@
 import React from "react";
-import { Music, Plus } from "lucide-react";
+import { Music, Plus, Trash2 } from "lucide-react";
 import "./TrackItem.css";
 
-const TrackItem = ({ track, onAdd }) => {
+const TrackItem = ({ track, onAdd, onRemove }) => {
   return (
     <div className="track-item">
       <div className="track-content">
@@ -23,6 +23,12 @@ const TrackItem = ({ track, onAdd }) => {
           className="add-btn"
         >
           <Plus className="add-icon" />
+        </button>
+        <button
+          onClick={() => onRemove(track.id)} // remove track from playlist
+          className="remove-btn"
+        >
+          <Trash2 className="remove-icon" />
         </button>
       </div>
     </div>
