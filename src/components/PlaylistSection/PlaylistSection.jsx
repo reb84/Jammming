@@ -2,7 +2,10 @@ import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
 import "./PlaylistSection.css";
 
-const PlaylistSection = ({ playlist, onRemoveTrack }) => {
+const PlaylistSection = ({
+  playlist,
+  onRemoveTrack,
+}) => {
   return (
     <div className="playlist-section">
       <h2 className="playlist-title">Your Playlist</h2>
@@ -15,6 +18,8 @@ const PlaylistSection = ({ playlist, onRemoveTrack }) => {
               <TrackItem
                 track={track} // track data
                 onRemove={onRemoveTrack} // remove track
+                showAddButton = {false}
+                showRemoveButton = {true}
               />
             </div>
           ))
