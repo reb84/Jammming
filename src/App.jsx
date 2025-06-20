@@ -36,7 +36,13 @@ function App() {
   const [playlistName, setPlaylistName] = useState("");
 
   const handleAddTrack = (track) => {
-    setPlaylist((prev) => [...prev, track]); // add track to playlist state
+    const alreadyAdded =
+      playlist.filter((playlistTrack) => playlistTrack.id === track.id).length >
+      0;
+
+    if (!alreadyAdded) {
+      setPlaylist((prev) => [...prev, track]); // add track to playlist state
+    }
   };
 
   const handleRemoveTrack = (trackId) => {
