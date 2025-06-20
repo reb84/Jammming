@@ -6,7 +6,7 @@ const PlaylistSection = ({
   playlist,
   onRemoveTrack,
   playlistName,
-  setPlaylistName
+  setPlaylistName,
 }) => {
   return (
     <div className="playlist-section">
@@ -18,11 +18,9 @@ const PlaylistSection = ({
           placeholder="Enter playlist name..."
         />
       </div>
-
       <h2 className="playlist-title">
         {playlistName ? playlistName : "Your Playlist"}
       </h2>
-
       <div className="playlist-tracks">
         {playlist.length > 0 ? (
           // maps through each track in playlist
@@ -43,6 +41,9 @@ const PlaylistSection = ({
           </div>
         )}
       </div>
+      <button className="save-btn" onClick={() => alert("Button was clicked!")}>
+        SAVE TO SPOTIFY
+      </button>
     </div>
   );
 };
