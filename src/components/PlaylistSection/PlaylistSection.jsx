@@ -5,10 +5,23 @@ import "./PlaylistSection.css";
 const PlaylistSection = ({
   playlist,
   onRemoveTrack,
+  playlistName,
+  setPlaylistName
 }) => {
   return (
     <div className="playlist-section">
-      <h2 className="playlist-title">Your Playlist</h2>
+      <div className="playlist-name">
+        <input
+          type="text"
+          value={playlistName}
+          onChange={(e) => setPlaylistName(e.target.value)}
+          placeholder="Enter playlist name..."
+        />
+      </div>
+
+      <h2 className="playlist-title">
+        {playlistName ? playlistName : "Your Playlist"}
+      </h2>
 
       <div className="playlist-tracks">
         {playlist.length > 0 ? (
@@ -18,8 +31,8 @@ const PlaylistSection = ({
               <TrackItem
                 track={track} // track data
                 onRemove={onRemoveTrack} // remove track
-                showAddButton = {false}
-                showRemoveButton = {true}
+                showAddButton={false}
+                showRemoveButton={true}
               />
             </div>
           ))

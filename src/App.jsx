@@ -33,6 +33,7 @@ const mockSearchResults = [
 
 function App() {
   const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setPlaylistName] = useState("");
 
   const handleAddTrack = (track) => {
     setPlaylist((prev) => [...prev, track]); // add track to playlist state
@@ -57,6 +58,8 @@ function App() {
 
           <PlaylistSection
             playlist={playlist}
+            playlistName={playlistName} // playlist name
+            setPlaylistName={setPlaylistName} // updated playlist name
             onRemoveTrack={handleRemoveTrack}
           />
         </div>
