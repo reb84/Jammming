@@ -18,6 +18,7 @@ const SearchBar = ({ onSearch }) => {
       <input
         type="text"
         value={inputValue}
+        onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
         onChange={handleChange}
         placeholder="Get Jammming..."
       />
