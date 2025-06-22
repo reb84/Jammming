@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import SearchSection from "./components/SearchSection/SearchSection";
+import SearchBar from "./components/SearchBar/SearchBar";
+import SearchResults from "./components/SearchResults/SearchResults";
 import PlaylistSection from "./components/PlaylistSection/PlaylistSection";
 import "./App.css";
 
@@ -34,11 +35,31 @@ const mockSearchResults = [
 function App() {
   const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (searchQuery) => {
+    setSearchQuery(searchQuery);
+
+    if (searchQuery.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
+
+    const filtered = mockSearchResults.filter(
+      (track) =>
+        track.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        track.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        track.album.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setSearchResults(filtered);
+  };
 
   const handleAddTrack = (track) => {
     const alreadyAdded =
       playlist.filter((playlistTrack) => playlistTrack.id === track.id).length >
-      0;
+      0; // check if already added
 
     if (!alreadyAdded) {
       setPlaylist((prev) => [...prev, track]); // add track to playlist state
@@ -57,8 +78,11 @@ function App() {
         </div>
 
         <div className="main-content">
-          <SearchSection
-            searchResults={mockSearchResults}
+          <SearchBar onSearch={handleSearch} />
+
+          <SearchResults
+            searchResults={searchResults}
+            searchQuery={searchQuery}
             onAddTrack={handleAddTrack}
           />
 

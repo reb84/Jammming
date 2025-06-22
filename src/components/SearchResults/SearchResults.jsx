@@ -1,13 +1,14 @@
 import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
-import SearchBar from "../SearchBar/SearchBar";
-import "./SearchSection.css";
+import "./SearchResults.css";
 
-const SearchSection = ({ searchQuery, searchResults, onAddTrack }) => {
+const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
+  if (searchQuery && searchResults.length === 0) {
+    return <div>No results found for "{searchQuery}"</div>;
+  }
+
   return (
     <div className="search-section">
-      <SearchBar />
-
       <div className="search-results">
         {searchResults.map((track) => (
           <TrackItem key={track.id} track={track} onAdd={onAddTrack} />
@@ -17,4 +18,4 @@ const SearchSection = ({ searchQuery, searchResults, onAddTrack }) => {
   );
 };
 
-export default SearchSection;
+export default SearchResults;
