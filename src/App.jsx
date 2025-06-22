@@ -30,6 +30,46 @@ const mockSearchResults = [
     duration: "2:54",
     preview_url: "https://example.com/preview3",
   },
+  {
+    id: "4",
+    name: "Good 4 U",
+    artist: "Olivia Rodrigo",
+    album: "SOUR",
+    duration: "2:58",
+    preview_url: "https://example.com/preview4",
+  },
+  {
+    id: "5",
+    name: "The Good Ones",
+    artist: "Gabby Barrett",
+    album: "Goldmine",
+    duration: "3:17",
+    preview_url: "https://example.com/preview5",
+  },
+  {
+    id: "6",
+    name: "Enemy",
+    artist: "Imagine Dragons",
+    album: "Mercury - Acts 1 & 2",
+    duration: "2:53",
+    preview_url: "https://example.com/preview6",
+  },
+  {
+    id: "7",
+    name: "Heartbreak on the Map",
+    artist: "Ryan Hurd",
+    album: "Pelago",
+    duration: "3:24",
+    preview_url: "https://example.com/preview7",
+  },
+  {
+    id: "8",
+    name: "Believer",
+    artist: "Imagine Dragons",
+    album: "Evolve",
+    duration: "3:24",
+    preview_url: "https://example.com/preview8",
+  },
 ];
 
 function App() {
