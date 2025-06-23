@@ -11,33 +11,32 @@ const TrackItem = ({
 }) => {
   return (
     <div className="track-item">
-      <div className="track-content">
-        <div className="track-cover">
-          <Music className="track-cover-icon" />
-        </div>
-        <div className="track-info">
-          <h3 className="track-name">{track.name}</h3>
-          <p className="track-artist">
-            {track.artist} • {track.album}
-          </p>
-          <p className="track-duration">{track.duration}</p>
-        </div>
+      <div className="track-cover">img
       </div>
+
+      <div className="track-info">
+        <h3 className="track-title">{track.name}</h3>
+        <p className="track-artist">
+          {track.artist} • {track.album}
+        </p>
+        <p className="track-duration">{track.duration}</p>
+      </div>
+
       <div className="track-action">
         {showAddButton && (
           <button
             onClick={() => onAdd(track)} // add track to playlist
-            className="add-btn"
+            className="action-btn add-btn"
           >
-            <Plus className="add-icon" />
+            <Plus className="action-icon" />
           </button>
         )}
         {showRemoveButton && (
           <button
             onClick={() => onRemove(track.id)} // remove track from playlist
-            className="remove-btn"
+            className="action-btn remove-btn"
           >
-            <Trash2 className="remove-icon" />
+            <Trash2 className="action-icon" />
           </button>
         )}
       </div>

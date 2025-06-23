@@ -34,13 +34,14 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <div className="header">
-          <h1 className="app-title">jammming</h1>
+        <div className="app-header">
+          <h1 className="app-title">
+            <a href="/">jammming</a>
+          </h1>
         </div>
 
+        <SearchBar onSearch={handleSearch} />
         <div className="main-content">
-          <SearchBar onSearch={handleSearch} />
-
           <SearchResults
             searchResults={searchResults}
             searchQuery={searchQuery}

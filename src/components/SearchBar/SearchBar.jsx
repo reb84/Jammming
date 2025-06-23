@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Search } from "lucide-react";
 import "./SearchBar.css";
 
 const SearchBar = ({ onSearch }) => {
@@ -14,17 +15,25 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="SearchBar">
-      <input
-        type="text"
-        value={inputValue}
-        onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
-        onChange={handleChange}
-        placeholder="Get Jammming..."
-      />
-      <button className="SearchButton" onClick={handleSubmit}>
-        SEARCH
-      </button>
+    <div className="searchbar-section">
+      <h2 className="search-title">Search Spotify</h2>
+
+      <div className="search-form">
+        <div className="search-input-container">
+          <Search className="search-icon" />
+          <input
+            type="text"
+            value={inputValue}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
+            onChange={handleChange}
+            placeholder="Search for songs, artists, or albums..."
+            className="search-input"
+          />
+        </div>
+        <button onClick={handleSubmit} className="search-btn">
+          Search
+        </button>
+      </div>
     </div>
   );
 };

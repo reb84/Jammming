@@ -1,5 +1,6 @@
 import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
+import { Music, Save } from "lucide-react";
 import "./PlaylistSection.css";
 
 const PlaylistSection = ({
@@ -10,17 +11,20 @@ const PlaylistSection = ({
 }) => {
   return (
     <div className="playlist-section">
-      <div className="playlist-name">
+      <div className="playlist-header">
+        <h2 className="playlist-title">
+          {playlistName ? playlistName : "Your Playlist"}
+        </h2>
+
         <input
           type="text"
           value={playlistName}
           onChange={(e) => setPlaylistName(e.target.value)}
+          className="name-input"
           placeholder="Enter playlist name..."
         />
       </div>
-      <h2 className="playlist-title">
-        {playlistName ? playlistName : "Your Playlist"}
-      </h2>
+
       <div className="playlist-tracks">
         {playlist.length > 0 ? (
           // maps through each track in playlist
@@ -37,16 +41,24 @@ const PlaylistSection = ({
         ) : (
           // empty playlist
           <div className="empty-playlist">
+            <Music className="empty-icon" />
             <p className="empty-text">Your playlist is empty</p>
+            <p className="empty-subtext">
+              Search and add some tracks to get started
+            </p>
           </div>
         )}
       </div>
-      <button
-        className="save-btn"
-        onClick={() => alert("Your playlist has been saved!")}
-      >
-        SAVE TO SPOTIFY
-      </button>
+
+      {playlist.length > 0 && (
+        <button
+          onClick={() => alert("Your playlist has been saved!")}
+          className="save-btn"
+        >
+          <Save className="save-icon" />
+          Save to Spotify
+        </button>
+      )}
     </div>
   );
 };
