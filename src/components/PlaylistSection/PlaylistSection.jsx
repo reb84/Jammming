@@ -41,7 +41,10 @@ const PlaylistSection = ({
           </div>
         )}
       </div>
-      <button className="save-btn" onClick={() => alert("Button was clicked!")}>
+      <button
+        className="save-btn"
+        onClick={() => alert("Your playlist has been saved!")}
+      >
         SAVE TO SPOTIFY
       </button>
     </div>
