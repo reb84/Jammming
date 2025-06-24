@@ -58,6 +58,13 @@ function App() {
           />
         </div>
       </div>
+      <div className="footer-container">
+        Project by{" "}
+        <a href="https://github.com/reb84" target="_blank" rel="noreferrer">
+          Reb84
+        </a>
+        .
+      </div>
     </div>
   );
 }
