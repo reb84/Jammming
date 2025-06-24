@@ -43,9 +43,6 @@ const PlaylistSection = ({
           <div className="empty-playlist">
             <Music className="empty-icon" />
             <p className="empty-text">Your playlist is empty</p>
-            <p className="empty-subtext">
-              Search and add some tracks to get started
-            </p>
           </div>
         )}
       </div>

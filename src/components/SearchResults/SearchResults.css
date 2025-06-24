@@ -23,3 +23,20 @@
     padding: 32px 0;
     margin: 0;
 }
+
+.empty-search {
+    text-align: center;
+    padding: 48px 0;
+}
+
+.empty-search-icon {
+    width: 48px;
+    height: 48px;
+    color: #d1d5db;
+    margin: 0 auto 12px;
+}
+
+.empty-search-text {
+    color: #6b7280;
+    margin: 0 0 4px 0;
+}
