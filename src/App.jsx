@@ -22,7 +22,9 @@ function App() {
       playlist.filter((playlistTrack) => playlistTrack.id === track.id).length >
       0; // check if already added
 
-    if (!alreadyAdded) {
+    if (alreadyAdded) {
+      alert("This song has already been added to your playlist");
+    } else {
       setPlaylist((prev) => [...prev, track]); // add track to playlist state
     }
   };
