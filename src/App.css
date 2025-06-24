@@ -1,31 +1,50 @@
 .App {
   min-height: 100vh;
-  background: #f3f4f6;
+  background: linear-gradient(135deg, #f5f0e8 0%, #ede4d3 100%);
   padding: 20px;
+  font-family: var(--main-font);
+  color: #4a4238;
+
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 0px 40px 40px 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .footer-container {
   text-align: center;
-margin-top: 60px;
+  margin-top: 60px;
+  font-size: 12px;
 }
 
 
 .app-header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 
 .app-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #111827;
-  margin: 0 0 8px 0;
+  background: linear-gradient(45deg, #d4a574, #e6c394);
+  color: #4a4238;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 54px;
+  display: inline-block;
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+  font-family: var(--header-font);
+  margin-bottom: 0px;
+}
+
+.app-subtitle {
+  color: #4a4238;
+  transform: rotate(-2deg);
 }
 
 .main-content {

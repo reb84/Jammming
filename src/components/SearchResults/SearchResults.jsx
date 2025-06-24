@@ -8,6 +8,7 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
   if (!searchQuery) {
     return (
       <div className="search-results-section">
+        <h3 className="results-title">Search Results</h3>
         <div className="empty-search">
           <Music className="empty-search-icon" />
           <p className="empty-search-text">Get searching to find some music</p>
@@ -20,6 +21,7 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
     // search but no results
     return (
       <div className="search-results-section">
+        <h3 className="results-title">Search Results</h3>
         <p className="no-results">No results found for "{searchQuery}"</p>
       </div>
     );

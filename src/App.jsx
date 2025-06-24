@@ -37,9 +37,8 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="app-header">
-          <h1 className="app-title">
-            <a href="/">jammming</a>
-          </h1>
+          <h1 className="app-title">musicNook</h1>
+          <h3 className="app-subtitle">A cozy playlist builder for Spotify</h3>
         </div>
 
         <SearchBar onSearch={handleSearch} />

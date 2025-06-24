@@ -16,11 +16,9 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="searchbar-section">
-      <h2 className="search-title">Search Spotify</h2>
-
+      <h3 className="searchbar-title">Get searching...</h3>
       <div className="search-form">
         <div className="search-input-container">
-          <Search className="search-icon" />
           <input
             type="text"
             value={inputValue}
@@ -30,8 +28,9 @@ const SearchBar = ({ onSearch }) => {
             className="search-input"
           />
         </div>
+
         <button onClick={handleSubmit} className="search-btn">
-          Search
+          <Search className="search-icon" />
         </button>
       </div>
     </div>
