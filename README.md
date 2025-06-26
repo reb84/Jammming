@@ -2,14 +2,20 @@
 
 A responsive web app built with React and Vite that lets you log into Spotify, search for tracks, and create your own playlists.
 
-## Features
-🔐 Spotify Login – Auth via Spotify to enable playlist management.
+## 🌐 Try It Out
 
-🔎 Track Search – Find songs quickly using Spotify’s search API.
+👉 [Launch the App](https://music-nook.vercel.app/)
 
-📄 Playlist Builder – Add tracks and save custom playlists to your account.
+Log in with your Spotify account to start searching for tracks and building your playlist.
 
-📱 Responsive Design – Works great on both desktop and mobile.
+🔐 Spotify Login required
+
+🔎 Search for songs
+
+📄 Save custom playlists to your account
+
+📱 Works great on mobile
 
 ## ✨ Coming Soon (maybe)
-▶️ Track Previews – Easily preview songs before adding them to your playlist.
+
+▶️ Track previews so you can listen before adding
