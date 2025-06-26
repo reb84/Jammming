@@ -1,12 +1,29 @@
 export const searchTracks = async (searchQuery, token) => {
-  if (searchQuery.trim() === "") {
+  // Basic validation
+  if (!searchQuery || searchQuery.trim() === "") {
     return [];
+  }
+
+  const trimmedQuery = searchQuery.trim();
+
+  // Check for minimum length and basic patterns
+  if (trimmedQuery.length < 2) {
+    return [];
+  }
+
+  // Check if query is just random characters (basic heuristic)
+  const hasVowels = /[aeiouAEIOU]/.test(trimmedQuery);
+  const hasReasonableLength = trimmedQuery.length <= 100;
+  const notAllSameChar = !/^(.)\1+$/.test(trimmedQuery);
+
+  if (!hasVowels && trimmedQuery.length > 5 && notAllSameChar) {
+    // Likely gibberish - but still search, let results filtering handle it
   }
 
   try {
     const response = await fetch(
       `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(
-        searchQuery
+        trimmedQuery
       )}&limit=20`,
       {
         headers: {
@@ -21,8 +38,37 @@ export const searchTracks = async (searchQuery, token) => {
 
     const data = await response.json();
 
+    // Check if we actually got meaningful results
+    if (!data.tracks || !data.tracks.items || data.tracks.items.length === 0) {
+      return [];
+    }
+
+    // Filter results based on relevance
+    const searchWords = trimmedQuery.toLowerCase().split(/\s+/);
+    const filteredTracks = data.tracks.items.filter((track) => {
+      const trackName = track.name.toLowerCase();
+      const artistName = track.artists[0].name.toLowerCase();
+      const albumName = track.album.name.toLowerCase();
+
+      // Check if at least one search word appears in track name, artist, or album
+      const hasMatch = searchWords.some(
+        (word) =>
+          word.length >= 2 &&
+          (trackName.includes(word) ||
+            artistName.includes(word) ||
+            albumName.includes(word))
+      );
+
+      return hasMatch;
+    });
+
+    // If no filtered results and original query looks like gibberish, return empty
+    if (filteredTracks.length === 0 && !hasVowels && trimmedQuery.length > 5) {
+      return [];
+    }
+
     // Transform Spotify's response to match your component's expected format
-    return data.tracks.items.map((track) => ({
+    return filteredTracks.map((track) => ({
       id: track.id,
       name: track.name,
       artist: track.artists[0].name,

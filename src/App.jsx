@@ -12,6 +12,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [token, setToken] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     // Check if we're returning from Spotify authorization
@@ -30,15 +31,25 @@ function App() {
     await SpotifyAuth.getAccessToken();
   };
 
-  const handleSearch = async (searchQuery) => {
+  const handleSearch = (searchQuery) => {
     setSearchQuery(searchQuery);
-    if (token) {
-      const results = await searchTracks(searchQuery, token);
-      setSearchResults(results);
-    } else {
-      console.log("No token available for search");
-      setSearchResults([]);
+
+    // Clear previous timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
     }
+
+    // Set new timeout
+    const newTimeout = setTimeout(async () => {
+      if (token && searchQuery.trim()) {
+        const results = await searchTracks(searchQuery, token);
+        setSearchResults(results);
+      } else {
+        setSearchResults([]);
+      }
+    }, 300); // Wait 300ms after user stops typing
+
+    setSearchTimeout(newTimeout);
   };
 
   const handleAddTrack = (track) => {
