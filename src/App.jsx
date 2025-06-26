@@ -3,7 +3,6 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import PlaylistSection from "./components/PlaylistSection/PlaylistSection";
 import SpotifyAuth from "./utils/SpotifyAuth";
-import { searchTracks } from "./utils/SpotifyAPI";
 import { searchTracks, savePlaylistToSpotify } from "./utils/SpotifyAPI";
 import "./App.css";
 

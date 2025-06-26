@@ -11,7 +11,9 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
         <h3 className="results-title">Search Results</h3>
         <div className="empty-search">
           <Music className="empty-search-icon" />
-          <p className="empty-search-text">Get searching to find some music</p>
+          <p className="empty-search-text">
+            Log into Spotify and start searching to find some music
+          </p>
         </div>
       </div>
     );
@@ -23,7 +25,8 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
       <div className="search-results-section">
         <h3 className="results-title">Search Results</h3>
         <p className="no-results">
-          No results found for "{searchQuery}. Are you logged in to Spotify?"
+          No results found for "{searchQuery}.<br />
+          Are you logged in to Spotify?"
         </p>
       </div>
     );
