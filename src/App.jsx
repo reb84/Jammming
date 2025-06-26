@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import PlaylistSection from "./components/PlaylistSection/PlaylistSection";
-import { searchTracks } from "./utils/MockSpotifyData";
+import SpotifyAuth from "./utils/SpotifyAuth";
+import { searchTracks } from "./utils/SpotifyAPI";
 import "./App.css";
 
 function App() {
@@ -10,11 +11,32 @@ function App() {
   const [playlistName, setPlaylistName] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [token, setToken] = useState("");
 
-  const handleSearch = (searchQuery) => {
+  useEffect(() => {
+    // Check if we're returning from Spotify authorization
+    if (window.location.href.includes("access_token=")) {
+      const accessToken = SpotifyAuth.getAccessToken();
+      if (accessToken) {
+        setToken(accessToken);
+      }
+    }
+  }, []);
+
+  const handleLogin = () => {
+    // This will redirect to Spotify if no token exists
+    SpotifyAuth.getAccessToken();
+  };
+
+  const handleSearch = async (searchQuery) => {
     setSearchQuery(searchQuery);
-    const results = searchTracks(searchQuery);
-    setSearchResults(results);
+    if (token) {
+      const results = await searchTracks(searchQuery, token);
+      setSearchResults(results);
+    } else {
+      console.log("No token available for search");
+      setSearchResults([]);
+    }
   };
 
   const handleAddTrack = (track) => {
@@ -38,6 +60,14 @@ function App() {
       <div className="container">
         <div className="app-header">
           <h1 className="app-title">musicNook</h1>
+          <div className="login-btn">
+            {!token ? (
+              <button onClick={handleLogin}>Log into Spotify</button>
+            ) : (
+              <p>Logged in! Token: {token.slice(0, 20)}...</p>
+            )}
+          </div>
+
           <h3 className="app-subtitle">A cozy playlist builder for Spotify</h3>
         </div>
 
