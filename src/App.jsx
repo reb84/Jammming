@@ -15,17 +15,19 @@ function App() {
 
   useEffect(() => {
     // Check if we're returning from Spotify authorization
-    if (window.location.href.includes("access_token=")) {
-      const accessToken = SpotifyAuth.getAccessToken();
-      if (accessToken) {
-        setToken(accessToken);
-      }
+    if (window.location.search.includes("code=")) {
+      const getToken = async () => {
+        const accessToken = await SpotifyAuth.getAccessToken();
+        if (accessToken) {
+          setToken(accessToken);
+        }
+      };
+      getToken();
     }
   }, []);
 
-  const handleLogin = () => {
-    // This will redirect to Spotify if no token exists
-    SpotifyAuth.getAccessToken();
+  const handleLogin = async () => {
+    await SpotifyAuth.getAccessToken();
   };
 
   const handleSearch = async (searchQuery) => {
