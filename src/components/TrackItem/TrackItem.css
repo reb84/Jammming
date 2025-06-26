@@ -10,7 +10,7 @@
 }
 
 .track-item:hover {
-    border: 2px solid #e5e7eb;
+    border: 1px solid #c9ad97;
 }
 
 .track-content {
@@ -24,12 +24,8 @@
 .track-cover {
     width: 48px;
     height: 48px;
-    background: #f3f4f6;
-    border-radius: 4px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
+    margin-right: 8px;
 }
 
 .cover-image {
@@ -58,7 +54,7 @@
 
 .track-title {
     font-weight: 500;
-    color: #111827;
+    color: #4a4238;
     margin: 0 0 4px 0;
     overflow: hidden;
     text-overflow: ellipsis;

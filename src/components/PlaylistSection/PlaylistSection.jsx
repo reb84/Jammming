@@ -22,6 +22,7 @@ const PlaylistSection = ({
           onChange={(e) => setPlaylistName(e.target.value)}
           className="name-input"
           placeholder="Enter playlist name..."
+          maxlength="50"
         />
       </div>
 

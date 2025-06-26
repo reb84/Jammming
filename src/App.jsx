@@ -73,15 +73,16 @@ function App() {
       <div className="container">
         <div className="app-header">
           <h1 className="app-title">musicNook</h1>
-          <div className="login-btn">
+          <h3 className="app-subtitle">A cozy playlist builder for Spotify</h3>
+          <div className="login">
             {!token ? (
-              <button onClick={handleLogin}>Log into Spotify</button>
+              <button className="login-btn" onClick={handleLogin}>
+                Log into Spotify
+              </button>
             ) : (
-              <p>Logged in! Token: {token.slice(0, 20)}...</p>
+              <p>Logged in!</p>
             )}
           </div>
-
-          <h3 className="app-subtitle">A cozy playlist builder for Spotify</h3>
         </div>
 
         <SearchBar onSearch={handleSearch} />

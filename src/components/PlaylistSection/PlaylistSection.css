@@ -9,7 +9,7 @@
 }
 
 .playlist-header {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 
@@ -18,7 +18,7 @@
     color: #4a4238;
     padding: 12px 25px;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     display: inline-block;
     transform: rotate(-2deg);
@@ -43,13 +43,9 @@
     border-color: #7b6958;
 }
 
-.playlist-tracks {
-    margin-bottom: 0px;
-}
-
 .playlist-track-item {
     align-items: center;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
 }
 
 
