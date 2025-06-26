@@ -8,6 +8,7 @@ const PlaylistSection = ({
   onRemoveTrack,
   playlistName,
   setPlaylistName,
+  onSavePlaylist,
 }) => {
   return (
     <div className="playlist-section">
@@ -49,10 +50,7 @@ const PlaylistSection = ({
       </div>
 
       {playlist.length > 0 && (
-        <button
-          onClick={() => alert("Your playlist has been saved!")}
-          className="save-btn"
-        >
+        <button onClick={onSavePlaylist} className="save-btn">
           <Save className="save-icon" />
           Save to Spotify
         </button>

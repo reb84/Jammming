@@ -4,6 +4,7 @@ import SearchResults from "./components/SearchResults/SearchResults";
 import PlaylistSection from "./components/PlaylistSection/PlaylistSection";
 import SpotifyAuth from "./utils/SpotifyAuth";
 import { searchTracks } from "./utils/SpotifyAPI";
+import { searchTracks, savePlaylistToSpotify } from "./utils/SpotifyAPI";
 import "./App.css";
 
 function App() {
@@ -68,6 +69,33 @@ function App() {
     setPlaylist((prev) => prev.filter((track) => track.id !== trackId));
   };
 
+  const handleSavePlaylist = async () => {
+    if (!playlistName.trim()) {
+      alert("Please enter a playlist name");
+      return;
+    }
+
+    if (playlist.length === 0) {
+      alert("Please add some tracks to your playlist");
+      return;
+    }
+
+    try {
+      const result = await savePlaylistToSpotify(playlistName, playlist, token);
+
+      if (result.success) {
+        alert(result.message);
+        // Optionally clear the playlist after saving
+        setPlaylist([]);
+        setPlaylistName("");
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      alert("Failed to save playlist. Please try again.");
+    }
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -98,6 +126,7 @@ function App() {
             playlistName={playlistName} // playlist name
             setPlaylistName={setPlaylistName} // updated playlist name
             onRemoveTrack={handleRemoveTrack}
+            onSavePlaylist={handleSavePlaylist} // save playlist
           />
         </div>
       </div>

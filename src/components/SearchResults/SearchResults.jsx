@@ -22,7 +22,9 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
     return (
       <div className="search-results-section">
         <h3 className="results-title">Search Results</h3>
-        <p className="no-results">No results found for "{searchQuery}"</p>
+        <p className="no-results">
+          No results found for "{searchQuery}. Are you logged in to Spotify?"
+        </p>
       </div>
     );
   }

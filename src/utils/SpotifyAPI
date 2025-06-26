@@ -83,3 +83,129 @@ export const searchTracks = async (searchQuery, token) => {
     return [];
   }
 };
+
+// Add these functions to your SpotifyAPI.js file
+
+// Get current user's profile (needed for user ID)
+export const getCurrentUser = async (token) => {
+  try {
+    const response = await fetch("https://api.spotify.com/v1/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error getting current user:", error);
+    throw error;
+  }
+};
+
+// Create a new playlist
+export const createPlaylist = async (
+  userId,
+  playlistName,
+  token,
+  isPublic = false
+) => {
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: playlistName,
+          description: "Created with musicNook",
+          public: isPublic,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating playlist:", error);
+    throw error;
+  }
+};
+
+// Add tracks to a playlist
+export const addTracksToPlaylist = async (playlistId, trackUris, token) => {
+  try {
+    // Spotify API accepts max 100 tracks at a time
+    const chunks = [];
+    for (let i = 0; i < trackUris.length; i += 100) {
+      chunks.push(trackUris.slice(i, i + 100));
+    }
+
+    const results = [];
+    for (const chunk of chunks) {
+      const response = await fetch(
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uris: chunk,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      results.push(await response.json());
+    }
+
+    return results;
+  } catch (error) {
+    console.error("Error adding tracks to playlist:", error);
+    throw error;
+  }
+};
+
+// Main function to save playlist (combines all steps)
+export const savePlaylistToSpotify = async (playlistName, tracks, token) => {
+  try {
+    // Step 1: Get current user
+    const user = await getCurrentUser(token);
+
+    // Step 2: Create playlist
+    const playlist = await createPlaylist(user.id, playlistName, token);
+
+    // Step 3: Add tracks to playlist
+    const trackUris = tracks.map((track) => track.uri);
+    if (trackUris.length > 0) {
+      await addTracksToPlaylist(playlist.id, trackUris, token);
+    }
+
+    return {
+      success: true,
+      playlist: playlist,
+      message: `Playlist "${playlistName}" created successfully with ${tracks.length} tracks!`,
+    };
+  } catch (error) {
+    console.error("Error saving playlist:", error);
+    return {
+      success: false,
+      error: error.message,
+      message: "Failed to save playlist to Spotify",
+    };
+  }
+};
