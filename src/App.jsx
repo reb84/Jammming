@@ -12,7 +12,6 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [token, setToken] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
@@ -32,28 +31,18 @@ function App() {
     await SpotifyAuth.getAccessToken();
   };
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = async (searchQuery) => {
     setSearchQuery(searchQuery);
 
-    // Clear previous timeout
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
+    if (token && searchQuery.trim()) {
+      setIsSearching(true); // Start loading immediately
+      const results = await searchTracks(searchQuery, token);
+      setSearchResults(results);
+      setIsSearching(false); // Stop loading
+    } else {
+      setSearchResults([]);
+      setIsSearching(false);
     }
-
-    // Set new timeout
-    const newTimeout = setTimeout(async () => {
-      if (token && searchQuery.trim()) {
-        setIsSearching(true); // start loading
-        const results = await searchTracks(searchQuery, token);
-        setSearchResults(results);
-        setIsSearching(false); // stop loading
-      } else {
-        setSearchResults([]);
-        setIsSearching(false); // stop loading for empty queries
-      }
-    }, 300); // Wait 300ms after user stops typing
-
-    setSearchTimeout(newTimeout);
   };
 
   const handleAddTrack = (track) => {
@@ -112,7 +101,7 @@ function App() {
         </header>
 
         <div className="main-content">
-          {/* Left Column - Search */}
+
           <div className="search-section">
             <SearchBar onSearch={handleSearch} />
 
@@ -120,10 +109,11 @@ function App() {
               searchResults={searchResults}
               searchQuery={searchQuery}
               onAddTrack={handleAddTrack}
+              isSearching={isSearching} // Add this prop
             />
           </div>
 
-          {/* Right Column - Playlist */}
+
           <div className="playlist-section">
             <PlaylistSection
               playlist={playlist}

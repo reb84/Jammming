@@ -15,7 +15,7 @@ const SearchResults = ({
       <div className="empty-state">
         <Search size={44} color="#4b5563" />
         <p className="empty-state-text">
-          Log in to Spotify and start searching to find some music
+          Log in to Spotify and start searching
         </p>
       </div>
     );

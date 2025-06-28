@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(inputValue);
+    onSearch(inputValue); // This calls your handleSearch function
   };
 
   const handleChange = (e) => {
@@ -15,22 +15,18 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-<div className="search-container">
+    <form onSubmit={handleSubmit} className="search-container">
       <div className="search-icon">
         <Search size={20} color="#9ca3af" />
       </div>
-          <input
-            type="text"
-            value={inputValue}
-            onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
-            onChange={handleChange}
-            placeholder="Search for songs, artists, or albums..."
-            className="search-input"
-          />
-        </div>
-
-
-
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+        placeholder="Search for songs, artists, or albums..."
+        className="search-input"
+      />
+    </form>
   );
 };
 
