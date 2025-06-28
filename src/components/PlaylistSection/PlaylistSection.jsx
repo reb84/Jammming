@@ -1,6 +1,6 @@
 import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
-import { Music, Save } from "lucide-react";
+import { Play, Save } from "lucide-react";
 import "./PlaylistSection.css";
 
 const PlaylistSection = ({
@@ -11,50 +11,55 @@ const PlaylistSection = ({
   onSavePlaylist,
 }) => {
   return (
-    <div className="playlist-section">
+    <div className="playlist">
       <div className="playlist-header">
-        <h2 className="playlist-title">
-          {playlistName ? playlistName : "Your Playlist"}
-        </h2>
-
         <input
           type="text"
           value={playlistName}
           onChange={(e) => setPlaylistName(e.target.value)}
-          className="name-input"
-          placeholder="Enter playlist name..."
-          maxlength="50"
+          className="playlist-title"
+          placeholder="My Playlist"
         />
+        <p className="playlist-info">track count</p>
       </div>
 
-      <div className="playlist-tracks">
+      <div className="track-list">
         {playlist.length > 0 ? (
           // maps through each track in playlist
           playlist.map((track, index) => (
-            <div key={`${track.id}-${index}`} className="playlist-track-item">
-              <TrackItem
-                track={track} // track data
-                onRemove={onRemoveTrack} // remove track
-                showAddButton={false}
-                showRemoveButton={true}
-              />
+            <div key={`${track.id}-${index}`} className="playlist-track">
+              <div className="playlist-track-content">
+                <TrackItem
+                  track={track} // track data
+                  onRemove={onRemoveTrack} // remove track
+                  showAddButton={false}
+                  showRemoveButton={true}
+                />
+              </div>
             </div>
           ))
         ) : (
           // empty playlist
-          <div className="empty-playlist">
-            <Music className="empty-icon" />
-            <p className="empty-text">Your playlist is empty</p>
+          <div className="playlist-empty">
+            <Play size={64} color="#4b5563" />
+            <p className="empty-playlist-text">Your playlist is empty</p>
+            <p className="empty-playlist-subtext">
+              Search and add songs to get started!
+            </p>
           </div>
         )}
       </div>
 
-      {playlist.length > 0 && (
-        <button onClick={onSavePlaylist} className="save-btn">
-          <Save className="save-icon" />
-          Save to Spotify
-        </button>
-      )}
+      <div className="save-section">
+        {playlist.length > 0 && (
+          <button onClick={onSavePlaylist} className="save-btn">
+            <span>
+              <Save className="save-icon" size={16} />
+              Save to Spotify
+            </span>
+          </button>
+        )}
+      </div>
     </div>
   );
 };

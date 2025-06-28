@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Music, Plus, Trash2 } from "lucide-react";
 import "./TrackItem.css";
 
 const TrackItem = ({
@@ -17,40 +17,39 @@ const TrackItem = ({
   };
 
   return (
-    <div className="track-item">
-      <div className="track-cover">
-        {track.image ? (
-          <img
-            src={track.image}
-            alt={`${track.album} cover`}
-            className="cover-image"
-          />
-        ) : (
-          <div className="cover-placeholder">♪</div>
-        )}
-      </div>
+    <div className="track">
       <div className="track-info">
-        <h3 className="track-title">{track.name}</h3>
-        <p className="track-artist">
-          {track.artist} • {track.album}
-        </p>
-        <p className="track-duration">{formatDuration(track.duration_ms)}</p>
+        <div className="track-art">
+          {track.image ? (
+            <img
+              src={track.image}
+              alt={`${track.album} cover`}
+              className="cover-art"
+            />
+          ) : (
+            <div className="placeholder-art">
+              <Music size={24} color="white" />
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h3 className="track-title">{track.name}</h3>
+          <p className="track-artist">{track.artist}</p>
+          <p className="track-album">{track.album}</p>
+          <p className="duration">{formatDuration(track.duration_ms)}</p>
+        </div>
       </div>
-      <div className="track-action">
+
+      <div className="track-actions">
         {showAddButton && (
-          <button
-            onClick={() => onAdd(track)} // add track to playlist
-            className="action-btn add-btn"
-          >
-            <Plus className="action-icon" />
+          <button className="add-button" onClick={() => onAdd(track)}>
+            <Plus size={16} color="white" />
           </button>
         )}
         {showRemoveButton && (
-          <button
-            onClick={() => onRemove(track.id)} // remove track from playlist
-            className="action-btn remove-btn"
-          >
-            <Trash2 className="action-icon" />
+          <button className="remove-button" onClick={() => onRemove(track.id)}>
+            <Trash2 size={16} color="white" />
           </button>
         )}
       </div>

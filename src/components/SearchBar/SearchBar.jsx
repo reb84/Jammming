@@ -15,10 +15,10 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="searchbar-section">
-      <h3 className="searchbar-title">Get searching...</h3>
-      <div className="search-form">
-        <div className="search-input-container">
+<div className="search-container">
+      <div className="search-icon">
+        <Search size={20} color="#9ca3af" />
+      </div>
           <input
             type="text"
             value={inputValue}
@@ -29,11 +29,8 @@ const SearchBar = ({ onSearch }) => {
           />
         </div>
 
-        <button onClick={handleSubmit} className="search-btn">
-          <Search className="search-icon" />
-        </button>
-      </div>
-    </div>
+
+
   );
 };
 

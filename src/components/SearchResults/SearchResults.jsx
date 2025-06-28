@@ -1,20 +1,17 @@
 import React from "react";
 import TrackItem from "../TrackItem/TrackItem";
-import { Music } from "lucide-react";
+import { Search, Music } from "lucide-react";
 import "./SearchResults.css";
 
 const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
   // no search query entered yet
   if (!searchQuery) {
     return (
-      <div className="search-results-section">
-        <h3 className="results-title">Search Results</h3>
-        <div className="empty-search">
-          <Music className="empty-search-icon" />
-          <p className="empty-search-text">
-            Log into Spotify and start searching to find some music
-          </p>
-        </div>
+      <div className="empty-state">
+        <Search size={44} color="#4b5563" />
+        <p className="empty-state-text">
+          Log in to Spotify and start searching to find some music
+        </p>
       </div>
     );
   }
@@ -22,9 +19,9 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
   if (searchQuery && searchResults.length === 0) {
     // search but no results
     return (
-      <div className="search-results-section">
-        <h3 className="results-title">Search Results</h3>
-        <p className="no-results">
+      <div className="empty-state">
+        <Music size={64} color="#4b5563" />
+        <p className="empty-state-text">
           No results found for "{searchQuery}.<br />
           Are you logged in to Spotify?"
         </p>
@@ -33,10 +30,9 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
   }
 
   return (
-    // no search and results
-    <div className="search-results-section">
-      <h3 className="results-title">Search Results</h3>
-      <div className="results-list">
+    <div>
+      <h2 className="section-title">Search Results</h2>
+      <div className="track-list">
         {searchResults.map((track) => (
           <TrackItem key={track.id} track={track} onAdd={onAddTrack} />
         ))}

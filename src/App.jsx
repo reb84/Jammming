@@ -84,7 +84,7 @@ function App() {
 
       if (result.success) {
         alert(result.message);
-        // Optionally clear the playlist after saving
+        // clear the playlist after saving
         setPlaylist([]);
         setPlaylistName("");
       } else {
@@ -96,45 +96,46 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <div className="container">
-        <div className="app-header">
+        <header className="header">
           <h1 className="app-title">musicNook</h1>
-          <h3 className="app-subtitle">A cozy playlist builder for Spotify</h3>
-          <div className="login">
+          <p className="app-subtitle">Create your perfect playlist</p>
+
+          <span>
             {!token ? (
               <button className="login-btn" onClick={handleLogin}>
-                Log into Spotify
+                <span>Log in to Spotify</span>
               </button>
             ) : (
-              <p>Logged in!</p>
+              <p className="logged">Logged in!</p>
             )}
+          </span>
+        </header>
+
+        <div className="main-content">
+          {/* Left Column - Search */}
+          <div className="search-section">
+            <SearchBar onSearch={handleSearch} />
+
+            <SearchResults
+              searchResults={searchResults}
+              searchQuery={searchQuery}
+              onAddTrack={handleAddTrack}
+            />
+          </div>
+
+          {/* Right Column - Playlist */}
+          <div className="playlist-section">
+            <PlaylistSection
+              playlist={playlist}
+              playlistName={playlistName} // playlist name
+              setPlaylistName={setPlaylistName} // updated playlist name
+              onRemoveTrack={handleRemoveTrack}
+              onSavePlaylist={handleSavePlaylist} // save playlist
+            />
           </div>
         </div>
-
-        <SearchBar onSearch={handleSearch} />
-        <div className="main-content">
-          <SearchResults
-            searchResults={searchResults}
-            searchQuery={searchQuery}
-            onAddTrack={handleAddTrack}
-          />
-
-          <PlaylistSection
-            playlist={playlist}
-            playlistName={playlistName} // playlist name
-            setPlaylistName={setPlaylistName} // updated playlist name
-            onRemoveTrack={handleRemoveTrack}
-            onSavePlaylist={handleSavePlaylist} // save playlist
-          />
-        </div>
-      </div>
-      <div className="footer-container">
-        Project by{" "}
-        <a href="https://github.com/reb84" target="_blank" rel="noreferrer">
-          Reb84
-        </a>
-        .
       </div>
     </div>
   );
