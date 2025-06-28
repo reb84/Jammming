@@ -20,7 +20,6 @@ const PlaylistSection = ({
           className="playlist-title"
           placeholder="My Playlist"
         />
-        <p className="playlist-info">track count</p>
       </div>
 
       <div className="track-list">

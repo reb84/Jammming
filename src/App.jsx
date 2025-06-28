@@ -13,6 +13,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [token, setToken] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     // Check if we're returning from Spotify authorization
@@ -42,10 +43,13 @@ function App() {
     // Set new timeout
     const newTimeout = setTimeout(async () => {
       if (token && searchQuery.trim()) {
+        setIsSearching(true); // start loading
         const results = await searchTracks(searchQuery, token);
         setSearchResults(results);
+        setIsSearching(false); // stop loading
       } else {
         setSearchResults([]);
+        setIsSearching(false); // stop loading for empty queries
       }
     }, 300); // Wait 300ms after user stops typing
 
@@ -74,14 +78,8 @@ function App() {
       return;
     }
 
-    if (playlist.length === 0) {
-      alert("Please add some tracks to your playlist");
-      return;
-    }
-
     try {
       const result = await savePlaylistToSpotify(playlistName, playlist, token);
-
       if (result.success) {
         alert(result.message);
         // clear the playlist after saving

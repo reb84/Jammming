@@ -3,7 +3,12 @@ import TrackItem from "../TrackItem/TrackItem";
 import { Search, Music } from "lucide-react";
 import "./SearchResults.css";
 
-const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
+const SearchResults = ({
+  searchQuery,
+  searchResults,
+  onAddTrack,
+  isSearching,
+}) => {
   // no search query entered yet
   if (!searchQuery) {
     return (
@@ -16,19 +21,31 @@ const SearchResults = ({ searchQuery, searchResults, onAddTrack }) => {
     );
   }
 
+  // currently searching
+  if (isSearching) {
+    return (
+      <div className="empty-state">
+        <Search size={44} color="#4b5563" />
+        <p className="empty-state-text">Searching...</p>
+      </div>
+    );
+  }
+
+  // search completed but no results
   if (searchQuery && searchResults.length === 0) {
-    // search but no results
     return (
       <div className="empty-state">
         <Music size={64} color="#4b5563" />
         <p className="empty-state-text">
-          No results found for "{searchQuery}.<br />
-          Are you logged in to Spotify?"
+          No results found for "{searchQuery}".
+          <br />
+          Are you logged in to Spotify?
         </p>
       </div>
     );
   }
 
+  // show results
   return (
     <div>
       <h2 className="section-title">Search Results</h2>
